@@ -227,6 +227,8 @@ alert_user() {
 }
 
 while true; do
+    alert_user "$DATE" "TEST" "1"
+    exit 0
     RESPONSE=$(curl --compressed -s \
         -H 'accept: application/json, text/plain, */*' \
         -H 'referer: https://reserve.bcparks.ca/dayuse/registration' \

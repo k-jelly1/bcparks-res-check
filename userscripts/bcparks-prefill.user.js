@@ -187,13 +187,13 @@
 
         const option = [...select.options].find(item =>
             normalize(item.textContent).includes(
-                normalize(CONFIG.target_pass)
+                normalize(CONFIG.targetPass)
             )
         );
 
         if (!option) {
             throw new Error(
-                `Could not find "${CONFIG.target_pass}". Available passes: ${availablePasses.join(", ")}`
+                `Could not find "${CONFIG.targetPass}". Available passes: ${availablePasses.join(", ")}`
             );
         }
 
@@ -203,7 +203,7 @@
         }
 
         console.log(
-            `[BC Parks] Selected ${CONFIG.target_pass}.`
+            `[BC Parks] Selected ${CONFIG.targetPass}.`
         );
     }
 
@@ -238,15 +238,15 @@
             )?.set;
 
         if (nativeSetter) {
-            nativeSetter.call(input, CONFIG.target_date);
+            nativeSetter.call(input, CONFIG.targetDate);
         } else {
-            input.value = CONFIG.target_date;
+            input.value = CONFIG.targetDate;
         }
 
         dispatchEvents(input);
 
         console.log(
-            `[BC Parks] Selected date ${CONFIG.target_date}.`
+            `[BC Parks] Selected date ${CONFIG.targetDate}.`
         );
     }
 
@@ -261,11 +261,11 @@
             await selectDate();
 
             showStatus(
-                `Ready: ${CONFIG.target_pass}, ${CONFIG.target_date}. Review and continue manually.`
+                `Ready: ${CONFIG.targetPass}, ${CONFIG.targetDate}. Review and continue manually.`
             );
 
             console.log(
-                `[BC Parks] Prefilled ${CONFIG.target_pass} for ${CONFIG.target_date}.`
+                `[BC Parks] Prefilled ${CONFIG.targetPass} for ${CONFIG.targetDate}.`
             );
         } catch (error) {
             console.error("[BC Parks]", error);
