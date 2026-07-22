@@ -219,16 +219,13 @@ alert_user() {
     echo "Capacity: $CAPACITY | Max: $MAX"
     echo "==================================="
 
-    powershell.exe -NoProfile -Command \
-    "[console]::Beep(1000,500); Start-Sleep -Milliseconds 200; [console]::Beep(1500,500); Start-Sleep -Milliseconds 200; [console]::Beep(2000,1000)"
-
-    powershell.exe -NoProfile -Command \
-    "Start-Process 'https://reserve.bcparks.ca/dayuse/registration'"
+	powershell.exe -NoProfile -Command \
+	"Start-Process 'https://reserve.bcparks.ca/dayuse/registration'; [console]::Beep(1000,300); [console]::Beep(1500,300)"
 }
 
 while true; do
-    alert_user "$DATE" "TEST" "1"
-    exit 0
+    # alert_user "$DATE" "TEST" "1"
+    # exit 0
     RESPONSE=$(curl --compressed -s \
         -H 'accept: application/json, text/plain, */*' \
         -H 'referer: https://reserve.bcparks.ca/dayuse/registration' \
@@ -269,6 +266,8 @@ while true; do
 
         MAX2=$(echo "$RESPONSE" | jq -r --arg d "$DATE2" \
             '.[$d].DAY.max // 0')
+
+		echo "Checking $DATE | capacity=$CAPACITY | max=$MAX"
 
         if [[ "$MAX2" =~ ^[0-9]+$ ]] && [ "$MAX2" -gt 0 ]; then
             if [ "$ALERTED_DATE2" = false ]; then
